@@ -4,12 +4,16 @@ on:
   push:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -19,8 +23,10 @@ jobs:
       - name: Install dependencies
         run: composer install --no-dev --prefer-dist
 
-      - name: Upload vendor
-        uses: actions/upload-artifact@v4
-        with:
-          name: vendor
-          path: vendor
+      - name: Commit vendor back to repo
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add vendor
+          git commit -m "update vendor" || echo "no changes"
+          git push
