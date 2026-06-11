@@ -1,0 +1,27 @@
+{
+    "name": "pzs/nav-online-invoice",
+    "description": "A PHP interface for Online Invoice Data Reporting of Hungarian Tax Office (NAV)",
+    "license": "MIT",
+    "autoload": {
+        "psr-0" : {
+            "NavOnlineInvoice" : "src"
+        }
+    },
+    "require": {
+      "ext-curl": "*",
+      "ext-simplexml": "*",
+      "ext-openssl": "*",
+      "ext-dom": "*",
+      "ext-libxml": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6"
+    },
+    "config": {
+        "audit": {
+            "ignore": [
+                "PKSA-z3gr-8qht-p93v"
+            ]
+        }
+    }
+}
